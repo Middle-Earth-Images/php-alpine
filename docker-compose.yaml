@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - appnet
+    container_name: php-image-test
+networks:
+  appnet:
+    driver: bridge
