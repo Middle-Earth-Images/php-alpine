@@ -38,5 +38,5 @@ jobs:
             --cache-from=$IMAGE_NAME:latest \
             --push \
             -t $IMAGE_NAME:${{ env.IMAGE_TAG }} \
-            --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
+            --platform linux/amd64,linux/arm64 \
             .
