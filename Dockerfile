@@ -1,5 +1,5 @@
-FROM alpine:3.20
-LABEL Maintainer="Middle Earth Media <middleearthmedia@proton.me>"
+FROM alpine:3.21
+LABEL Maintainer="Michael Henry <mikethenry@proton.me>"
 LABEL Description="Lightweight container with Nginx & PHP based on Alpine Linux."
 
 # Install packages and remove default server definition
@@ -17,30 +17,31 @@ RUN apk -U upgrade \
 	make \
 	musl-dev \
 	nginx \
-	php83 \
-	php83-ctype \
-	php83-curl \
-	php83-dom \
-	php83-dev \
-	php83-fileinfo \
-	php83-fpm \
-	php83-gd \
-	php83-intl \
-	php83-json \
-	php83-mbstring \
-	php83-mysqli \
-	php83-opcache \
-	php83-openssl \
-	php83-phar \
-	php83-pdo \
-	php83-session \
-	php83-simplexml \
-	php83-tokenizer \
-	php83-xml \
-	php83-xmlreader \
-	php83-xmlwriter \
-	php83-zlib \
-	php83-zip \
+	php84 \
+	php84-ctype \
+	php84-curl \
+	php84-dom \
+	php84-dev \
+	php84-fileinfo \
+	php84-fpm \
+	php84-gd \
+	php84-intl \
+	php84-json \
+	php84-mbstring \
+	php84-mysqli \
+	php84-opcache \
+	php84-openssl \
+	php84-pcntl \
+	php84-phar \
+	php84-pdo \
+	php84-session \
+	php84-simplexml \
+	php84-tokenizer \
+	php84-xml \
+	php84-xmlreader \
+	php84-xmlwriter \
+	php84-zlib \
+	php84-zip \
 	supervisor \
 	wget
 
@@ -48,14 +49,14 @@ RUN apk -U upgrade \
 COPY config/nginx.conf /etc/nginx/nginx.conf
 
 # Configure PHP-FPM
-COPY config/fpm-pool.conf /etc/php83/php-fpm.d/www.conf
-COPY config/php.ini /etc/php83/conf.d/custom.ini
+COPY config/fpm-pool.conf /etc/php84/php-fpm.d/www.conf
+COPY config/php.ini /etc/php84/conf.d/custom.ini
 
 # Normalize version specific php & phpize & php-config
-RUN ln -sf /usr/bin/php83 /usr/bin/php
-RUN ln -sf /usr/bin/phpize83 /usr/bin/phpize
-RUN ln -sf /usr/bin/php-config83 /usr/bin/php-config
-RUN ln -sf /etc/php83 /etc/php
+RUN ln -sf /usr/bin/php84 /usr/bin/php
+RUN ln -sf /usr/bin/phpize84 /usr/bin/phpize
+RUN ln -sf /usr/bin/php-config84 /usr/bin/php-config
+RUN ln -sf /etc/php84 /etc/php
 
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -71,11 +72,11 @@ RUN mkdir -p /var/www/html
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN addgroup -S webuser && adduser -S webuser -G webuser
-RUN chown -R webuser.webuser /var/www/html && \
-	chown -R webuser.webuser /run && \
-	chown -R webuser.webuser /var/lib/nginx && \
-	chown -R webuser.webuser /var/log/nginx && \
-	chown -R webuser.webuser /var/log/php83
+RUN chown -R webuser:webuser /var/www/html && \
+	chown -R webuser:webuser /run && \
+	chown -R webuser:webuser /var/lib/nginx && \
+	chown -R webuser:webuser /var/log/nginx && \
+	chown -R webuser:webuser /var/log/php84
 USER webuser
 
 # Add application

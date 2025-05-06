@@ -6,7 +6,7 @@ on:
       - '**' # Runs on any tag push
 
 env:
-  IMAGE_NAME: middleearthmedia/php-alpine
+  IMAGE_NAME: uadevelopment/php
 
 jobs:
   build_tag:
@@ -32,11 +32,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build multi-arch image and push release tag
+      - name: Build image and push release tag (amd64 only)
         run: |-
           docker buildx build \
             --cache-from=$IMAGE_NAME:latest \
             --push \
             -t $IMAGE_NAME:${{ env.IMAGE_TAG }} \
-            --platform linux/amd64,linux/arm64 \
+            --platform linux/amd64 \
             .
