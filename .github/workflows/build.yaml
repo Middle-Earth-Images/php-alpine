@@ -6,7 +6,7 @@ on:
       - '**' # Runs on any tag push
 
 env:
-  IMAGE_NAME: uadevelopment/php
+  IMAGE_NAME: middleearthmedia/php-alpine
 
 jobs:
   build_tag:
