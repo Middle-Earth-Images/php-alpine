@@ -1,4 +1,4 @@
-FROM alpine:3.21
+FROM alpine:3.22
 LABEL Maintainer="Michael Henry <mikethenry@proton.me>"
 LABEL Description="Lightweight container with Nginx & PHP based on Alpine Linux."
 
@@ -25,6 +25,7 @@ RUN apk -U upgrade \
 	php84-fileinfo \
 	php84-fpm \
 	php84-gd \
+	php84-iconv \
 	php84-intl \
 	php84-json \
 	php84-mbstring \
