@@ -90,9 +90,5 @@ WORKDIR /var/www/html
 # Expose the port nginx is reachable on
 EXPOSE 8080
 
-# Docker HEALTHCHECK (ignored by Kubernetes unless probes are set in the Pod spec)
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-	CMD wget -qO- http://localhost:8080 || exit 1
-
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
