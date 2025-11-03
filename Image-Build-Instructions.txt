@@ -1,0 +1,23 @@
+Note: remove all images to ensure no caching.
+
+# Create a new builder instance if not already created
+docker buildx create --name mybuilder --driver docker-container --bootstrap
+
+# Use the new builder
+docker buildx use mybuilder
+
+docker buildx build \
+  --no-cache \
+  --platform linux/amd64 \
+  --sbom=true \
+  --provenance=true \
+  -t middleearthmedia/php:8.4-latest-slim \
+  --push .
+
+docker buildx build \
+  --no-cache \
+  --platform linux/amd64 \
+  --sbom=true \
+  --provenance=true \
+  -t ghcr.io/Middle-Earth-Images/php:8.4-latest-slim \
+  --push .
