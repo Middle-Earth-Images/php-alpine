@@ -6,12 +6,15 @@ docker buildx create --name mybuilder --driver docker-container --bootstrap
 # Use the new builder
 docker buildx use mybuilder
 
+# Clear buildx cache
+docker buildx prune -af
+
 docker buildx build \
   --no-cache \
   --platform linux/amd64 \
   --sbom=true \
   --provenance=true \
-  -t middleearthmedia/php:8.4-latest-slim \
+  -t middleearthmedia/php-alpine:8.4-latest-slim \
   --push .
 
 docker buildx build \
@@ -19,5 +22,5 @@ docker buildx build \
   --platform linux/amd64 \
   --sbom=true \
   --provenance=true \
-  -t ghcr.io/Middle-Earth-Images/php:8.4-latest-slim \
+  -t ghcr.io/Middle-Earth-Images/php-alpine:8.4-latest-slim \
   --push .
