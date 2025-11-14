@@ -14,7 +14,7 @@ docker buildx build \
   --platform linux/amd64 \
   --sbom=true \
   --provenance=true \
-  -t middleearthmedia/php-alpine:8.4-latest-slim \
+  -t ua00mthenry/php-alpine:8.4-slim \
   --push .
 
 docker buildx build \
@@ -22,5 +22,5 @@ docker buildx build \
   --platform linux/amd64 \
   --sbom=true \
   --provenance=true \
-  -t ghcr.io/Middle-Earth-Images/php-alpine:8.4-latest-slim \
+  -t ghcr.io/middle-earth-images/php-alpine:8.4-slim \
   --push .
